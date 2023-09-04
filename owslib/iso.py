@@ -1293,3 +1293,17 @@ class MI_Instrument(object):
 
             val = inst.find(util.nspath_eval('gmi:type', namespaces))
             self.type = util.testXMLValue(val)
+
+class STAC_DatacubeExtension(object):
+    """Process STAC Datacube Extension """
+
+    def __init__(self, dcube=None):
+        if dcube is None:
+            self.dimensions = None
+            self.variables = None
+        else:
+            val = dcube.find(util.nspath_eval('gmd:dimension', namespaces))
+            self.dimensions = util.testXMLValue(val)
+
+            val = dcube.find(util.nspath_eval('gmd:rangeElementDescription', namespaces))
+            self.variables = util.testXMLValue(val)
